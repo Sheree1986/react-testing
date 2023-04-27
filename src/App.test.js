@@ -15,8 +15,12 @@ test('App should render', () => {
 
 test('Button should render', () => {
   // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
-});
+//   expect('no test written').toBe('tested');
+// });
+  render(<App />);
+  const themeButton = screen.getByText('Current theme: light')
+  expect(themeButton).toBeInTheDocument();
+}); 
 
 /**
  * Verify clicking button should change theme
@@ -24,7 +28,13 @@ test('Button should render', () => {
  */
 test('theme button should update button text', () => {
   // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+//   expect('no test written').toBe('tested');
+// });
+  render(<App />);
+  const themeButton = screen.getByText('Current theme: light')
+  fireEvent.click(themeButton)
+  const changedButton = screen.getByText('Current theme: dark')
+  expect(changedButton).toBeInTheDocument();
 });
 
 // BONUS
@@ -32,7 +42,12 @@ test('theme button should update button text', () => {
 // e.g.: expect(element).toHaveStyle('color: #FFF');
 test('theme button should toggle styles', () => {
   // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+//   expect('no test written').toBe('tested');
+// });
+  render(<App />);
+  const themeButton = screen.getByText('Current theme: light')
+  fireEvent.click(themeButton)
+  expect(document.body).toHaveStyle('background-color: rgb(51,51,51)')
 });
 
 /**
@@ -46,7 +61,15 @@ test('theme button should toggle styles', () => {
  */
 test('hidden button should toggle hidden content', () => {
   // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+//   expect('no test written').toBe('tested');
+// });
+    render(<App />);
+  let hiddenText = screen.queryByText("this content is hidden by default")
+  expect(hiddenText).not.toBeInTheDocument()
+  const toggleButton = screen.getByText('Show hidden content')
+  fireEvent.click(toggleButton)
+  hiddenText = screen.queryByText("this content is hidden by default")
+  expect(hiddenText).toBeInTheDocument
 });
 
 
